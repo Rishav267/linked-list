@@ -1,0 +1,58 @@
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     struct ListNode *next;
+ * };
+ */
+struct ListNode *getIntersectionNode(struct ListNode *headA, struct ListNode *headB) {
+    struct ListNode* temp1 = headA;
+    struct ListNode* temp2 = headB;
+    
+    int count1=0,i;
+    int count2=0;
+    
+    while(temp1 != NULL)
+    {
+        count1++;
+        temp1 = temp1->next;
+    }
+    
+    while(temp2 != NULL)
+    {
+        count2++;
+        temp2 = temp2->next;
+    }
+    temp1 = headA;
+    temp2 = headB;
+    
+    if(count1>count2)
+    {
+        for(i=0;i<(count1-count2);i++)
+        {
+            temp1 = temp1->next;
+        }
+    }
+    else
+    {
+        for(i=0;i<(count2-count1);i++)
+        {
+            temp2 = temp2->next;
+        }
+       
+    }
+    while(temp1 != NULL && temp2 !=NULL)
+    {
+        if(temp1 == temp2)
+           {
+                return temp1;
+            }
+        else
+        {
+            temp1 = temp1->next;
+            temp2=temp2->next;
+        }
+    }
+    
+    return temp1;
+}
